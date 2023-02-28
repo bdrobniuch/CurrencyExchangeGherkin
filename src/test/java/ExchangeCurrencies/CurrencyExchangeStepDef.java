@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class CurrencyExchangeStepDef{
                         new BigDecimal (entry.get("sell"))));
     }
 
-    @ParameterType("USD|GBP")
+    @ParameterType("USD|GBP|RUB|PLN")
     public Currency currency(String unformatCurrency)
     {
         return Currency.valueOf(unformatCurrency);
@@ -48,7 +49,7 @@ public class CurrencyExchangeStepDef{
     @Then("She gets {double} {currency}")
     public void actor_gets(Double amountExpected, Currency destinationCurrency) {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(BigDecimal.valueOf(amountExpected), result);
+        assertEquals(BigDecimal.valueOf(amountExpected).setScale(2, RoundingMode.FLOOR), result);
     }
 }
 

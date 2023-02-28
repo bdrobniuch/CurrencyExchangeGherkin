@@ -1,5 +1,6 @@
 package ExchangeCurrencies;
 
+import java.math.MathContext;
 import java.util.Map;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,6 +18,6 @@ public class CurrencyExchange {
     {
         ExchangeType source = exchangeTypes.get(sourceCurrency);
         ExchangeType dest = exchangeTypes.get(destinationCurrency);
-        return source.getSellPrice().multiply(dest.getBuyPrice()).multiply(amount).setScale(2, RoundingMode.FLOOR);
+        return amount.multiply(source.getSellPrice().divide(dest.getBuyPrice(), MathContext.DECIMAL128)).setScale(2, RoundingMode.FLOOR);
     }
 }
