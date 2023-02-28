@@ -10,8 +10,8 @@ Feature: Currency Exchange. Our client can decide to sell or buy currencies.
       | RUB      | 0.01327   | 0.01329    |
 
   Rule: Our client can chose to define both the amount from the source account as well as the amount for the destination account.
-    Scenario: you choose the source amount
-      When the client exhange 1000 USD to GBP
-      Then the outcome amount will be 1040.22
+    Example: where Cindy chooses the source amount
+      When Cindy exchanges 1000 USD to GBP
+      Then She gets 1040.22 GBP
 
   Rule: if there is no account with chosen currency assume to create the account  with a cleared account balance

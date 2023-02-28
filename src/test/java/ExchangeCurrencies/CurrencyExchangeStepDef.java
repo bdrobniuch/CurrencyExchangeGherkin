@@ -1,6 +1,5 @@
-import ExchangeCurrencies.Currency;
-import ExchangeCurrencies.ExchangeType;
-import ExchangeCurrencies.CurrencyExchange;
+package ExchangeCurrencies;
+
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
@@ -40,14 +39,14 @@ public class CurrencyExchangeStepDef{
         this.exchangeTypes = entries.stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    @When("the client exhange {double} {currency} to {currency}")
-    public void the_client_exhange_USD_to_GBP(Double amountToChange, Currency sourceCurrency, Currency destinationCurrency) {
+    @When("Cindy exchanges {double} {currency} to {currency}")
+    public void actor_exchanges_currency_and_chooses_the_source_amount(Double amountToChange, Currency sourceCurrency, Currency destinationCurrency) {
         // Write code here that turns the phrase above into concrete actions
         result = CurrencyExchange.execute(BigDecimal.valueOf(amountToChange), this.exchangeTypes, sourceCurrency, destinationCurrency);
     }
 
-    @Then("the outcome amount will be {double}")
-    public void the_outcome_amount_will_be(Double amountExpected) {
+    @Then("She gets {double} {currency}")
+    public void actor_gets(Double amountExpected, Currency destinationCurrency) {
         // Write code here that turns the phrase above into concrete actions
         assertEquals(BigDecimal.valueOf(amountExpected), result);
     }
