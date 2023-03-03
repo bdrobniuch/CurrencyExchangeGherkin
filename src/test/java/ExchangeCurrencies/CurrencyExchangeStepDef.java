@@ -43,11 +43,23 @@ public class CurrencyExchangeStepDef{
     @When("Cindy exchanges {double} {currency} to {currency}")
     public void actor_exchanges_currency_and_chooses_the_source_amount(Double amountToChange, Currency sourceCurrency, Currency destinationCurrency) {
         // Write code here that turns the phrase above into concrete actions
-        result = CurrencyExchange.execute(BigDecimal.valueOf(amountToChange), this.exchangeTypes, sourceCurrency, destinationCurrency);
+        result = CurrencyExchange.execute(BigDecimal.valueOf(amountToChange), this.exchangeTypes, sourceCurrency, destinationCurrency, true);
     }
 
     @Then("She gets {double} {currency}")
     public void actor_gets(Double amountExpected, Currency destinationCurrency) {
+        // Write code here that turns the phrase above into concrete actions
+        assertEquals(BigDecimal.valueOf(amountExpected).setScale(2, RoundingMode.FLOOR), result);
+    }
+
+    @When("Cindy exchanges {currency} to {double} {currency}")
+    public void actor_exchanges_currency_and_chooses_the_destination_amount(Currency sourceCurrency, Double amountToChange, Currency destinationCurrency) {
+        // Write code here that turns the phrase above into concrete actions
+        result = CurrencyExchange.execute(BigDecimal.valueOf(amountToChange), this.exchangeTypes, sourceCurrency, destinationCurrency, false);
+    }
+
+    @Then("She pays {double} {currency}")
+    public void actor_pays(Double amountExpected, Currency sourceCurrency) {
         // Write code here that turns the phrase above into concrete actions
         assertEquals(BigDecimal.valueOf(amountExpected).setScale(2, RoundingMode.FLOOR), result);
     }

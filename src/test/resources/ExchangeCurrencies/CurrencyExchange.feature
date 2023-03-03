@@ -13,5 +13,11 @@ Feature: Currency Exchange. Our client can decide to sell or buy currencies.
     Example: where Cindy chooses the source amount
       When Cindy exchanges 1000 USD to PLN
       Then She gets 4325.10 PLN
+    Example: where Cindy chooses the destination amount
+      When Cindy exchanges USD to 1000 PLN
+      Then She pays 231.21 USD
+    Example: where Cindy chooses the destination amount
+      When Cindy exchanges USD to 4325.10 PLN
+      Then She pays 1000 USD
 
   Rule: if there is no account with chosen currency assume to create the account  with a cleared account balance
