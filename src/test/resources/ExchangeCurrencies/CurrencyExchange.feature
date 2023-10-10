@@ -21,3 +21,17 @@ Feature: Currency Exchange. Our client can decide to sell or buy currencies.
       Then She pays 1000 USD
 
   Rule: if there is no account with chosen currency assume to create the account  with a cleared account balance
+    Example: where Cindy has no account
+      Given Cindy has no account in USD
+      When She checks her account in USD
+      Then She is informed that there is no account
+
+      Example: where Cindy has an account
+        Given Cindy has 1000 USD
+        When She checks her account in USD
+        Then She is informed that she has 1000 USD
+
+    Example: where Cindy transfers money to a non existing account
+      Given Cindy has no account in USD
+      When Cindy exchanges 1000 EUR to USD
+      Then She gets 4325.10 USD
